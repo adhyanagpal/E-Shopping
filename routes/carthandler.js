@@ -39,27 +39,35 @@ route.get('/addtocart/:id',(req,res)=>{
     }
     const relid=req.params.id
     //const user=req.user
-    // Users.findOne({
-    //     where:{
-    //         id:req.user.id
-    //     }
-    // }).then(reluser=>{
-    //     UsersCart.create
-    // })
-    Items.findOne({
+    Users.findOne({
         where:{
-            id:relid
+            id:req.user.id
         }
-    }).then(relitem=>{
-        Users.addItems(item)
-        // UsersCart.create({
-        //     userId:req.user.id,
-        //     //item_id:parseInt(relid,10),
-        //     itemId:relitem.id,
-        //     quantity:1,
-        //     amount:relitem.price,
-        // })
-    }).then(()=>{
+    }).then(reluser=>{
+        //UsersCart.create
+        Items.findOne({
+            where:{
+                id:relid
+            }
+        }).then(relitem=>{
+            reluser.addItems(relitem)
+        })
+    })
+    // Items.findOne({
+    //     where:{
+    //         id:relid
+    //     }
+    // }).then(relitem=>{
+    //     req.user.addItems(relitem)
+    //     // UsersCart.create({
+    //     //     userId:req.user.id,
+    //     //     //item_id:parseInt(relid,10),
+    //     //     itemId:relitem.id,
+    //     //     quantity:1,
+    //     //     amount:relitem.price,
+    //     // })
+    // })
+    .then(()=>{
         res.redirect('/shopnow')
     })
 
