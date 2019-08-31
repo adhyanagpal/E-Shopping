@@ -33,8 +33,12 @@ const UsersCart=sequelize.define('UsersCart',{
     // },
     quantity:{
         type:Sequelize.INTEGER,
-        defaultValue:0,
+        defaultValue:1,
     },
+    amount:{
+        type:Sequelize.INTEGER,
+        defaultValue:0,
+    }
 })
 
 // Users.hasMany(Items)

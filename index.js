@@ -15,17 +15,21 @@ app.use(express.static(__dirname+'/public'))
 const entryroute=require('./routes/entry.js')
 const itemsroute=require('./routes/products.js')
 const cartroute=require('./routes/carthandler.js')
+const exitroute=require('./routes/exit.js')
+const paymentroute=require('./routes/payment.js')
 
 app.use(entryroute.route)
 app.use(itemsroute)
 app.use(cartroute)
+app.use(exitroute)
+app.use(paymentroute)
 
 app.get('/',(req,res)=>{
-    res.render('index')
+    res.render('index',{currentUser:req.user})
 })
 
 app.get('/about',(req,res)=>{
-    res.render('about')
+    res.render('about',{currentUser:req.user})
 })
 
 // app.get('/shopnow',(req,res)=>{

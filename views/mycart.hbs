@@ -19,45 +19,65 @@
     .delete-btn{
         Cursor: pointer;
     }
+    .local{
+        margin-left: 120px;
+    }
+    .quant{
+        width:25px;
+    }
+    form{
+        float:left;
+    }
+    .local2{
+        margin-left: 550px;
+        margin-top: 50px;
+    }
 </style>
 
 <body>
     {{>navbar}}
-
-    <div class="container">
+    <table class='local'>
+        <thead>
+            <tr>
+                <th style="width:200px"></th>
+                <th style="width:200px text-align:center">Item</th>
+                <th style="width:70px">Quantity</th>
+                <th style="width:150px"></th>
+                <th style="width:200px">Amount</th>            
+            </tr>
+        </thead>
         {{#each arr}}
-            <div class="row">
-                <div class='col-1'>1</div>
-                <div class='col-6'>
+            <tr>
+                <td style="width:200px text-align:center">
                     <img src={{imgurl}} width='100px'>
-                    {{title}}
-                    <button class='btn-secondary'>Remove From Cart</button>
-                </div>
-                <div class='col-2'>1</div>
-            <div class='col-3'>{{price}}</div>
-        {{/each}}
-        {{!-- </div> 
-        <div class="row">
-            <div class='col-1'>1</div>
-            <div class='col-6'>
-                <img src='/kurtasale.jpg' width='100px'>
-                Earrings
-                <button class='btn-secondary'>Remove From Cart</button>
-                <span class='delete-btn'></span>
-            </div>
-            <div class='col-2'>1</div>
-           <div class='col-3'>20</div>
-           
-       </div>  --}}
-    </div>
+                </td>
+                <td style="width:200px">
+                  {{title}}  
+                </td>
+                <td style="width:70px text-align:center">
+                  {{UsersCart.quantity}}
+                </td>
+                <td style="150px">
 
-    {{!-- <table width='100%' border='1px solid black'>
-        <tr>
-            <th>S.No</th>
-            <th>Items</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-    </table> --}}
+                  <form method="POST" action="/increasequantity/{{id}}"><button class="quant">+</button></form>
+                  <form method="POST" action="/decreasequantity/{{id}}"><button class="quant"> - </button></form>
+                </td>
+                <td style="width:200px">
+                    {{UsersCart.amount}}
+                </td>
+                <td style="width:200px">
+                    <form method="POST" action="/removefromcart/{{id}}">
+                        <button class='btn-secondary'>Remove From Cart</button>
+                    </form>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+
+    <form method="GET" action="/buynow">
+        <button class="btn btn-secondary btn-lg local2">Buy Now</button>
+    </form>
+
+    
 </body>
 </html>

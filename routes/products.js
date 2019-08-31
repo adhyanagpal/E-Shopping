@@ -93,7 +93,7 @@ route.get('/shopnow',(req,res)=>{
         Items.findAll().then(function (users){
             let arr=users.map(u => u.get({plain: true}))
             //console.log(arr)
-            res.render('shopping-final',{arr})
+            res.render('shopping-final',{arr,currentUser:req.user})
             //res.sendStatus(200)
         });
     // }
